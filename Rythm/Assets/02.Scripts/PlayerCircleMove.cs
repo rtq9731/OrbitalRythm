@@ -8,11 +8,11 @@ public class PlayerCircleMove : MonoBehaviour
 
     bool isInner = false;
 
-    GameTimer timer = null;
+    [SerializeField] GameTimer timer = null;
 
-    private void Start()
+    private void Awake()
     {
-
+        timer.onTimerSet += () => gameObject.SetActive(true);
     }
 
     // Update is called once per frame

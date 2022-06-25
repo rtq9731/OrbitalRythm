@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[SerializeField]
+[Serializable]
 [CreateAssetMenu(fileName = "MapDataso", menuName = "ScriptableObject/Mapdata")]
 public class MapDataSO : ScriptableObject
 {
-    string songName = "";
-    string makerName = "";
-    
-    float bpm = 0f;
-    float songeSeconds = 0f;
+    public string songName = "";
+    public string makerName = "";
 
-    long songTimeTick = 0;
+    public float bpm = 0f;
+    public float songeSeconds = 0f;
 
-    List<Obstacle> obstacles;
+    public long songTimeTick = 0;
+
+    public List<Obstacle> obstacles;
 }

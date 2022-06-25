@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class MapBaseGenerator : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
     [SerializeField] float mapRadius = 0f;
@@ -16,8 +16,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
-
-        GenerateMap();
+        GenerateMapBase();
     }
 
     private void Update()
@@ -28,7 +27,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateMap()
+    public void GenerateMapBase()
     {
         for (int i = 0; i <= 360; i++)
         {
