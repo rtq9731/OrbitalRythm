@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,15 +19,19 @@ public class ObstaclePoolManager : MonoBehaviour
         obstaclePoolDict.Add(ObstacleType.LONG, LongObstaclePool);
         obstaclePoolDict.Add(ObstacleType.HEAL, HealObstaclePool);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(ObstacleType)).Length; i++)
         {
-
+            for (int j = 0; j < 5; j++)
+            {
+                CreateObstacle<ObstacleScript>((ObstacleType)i);
+            }
         }
+
     }
 
     private T CreateObstacle<T>(ObstacleType type) where T : ObstacleScript
     {
-        T result = Instantiate(obstaclePrefabs[(int)type]) as T;
+        T result = Instantiate(obstaclePrefabs[(int)type], transform) as T;
         result.gameObject.SetActive(false);
 
         obstaclePoolDict[type].Enqueue(result);
@@ -34,23 +39,23 @@ public class ObstaclePoolManager : MonoBehaviour
         return result;
     }
 
-    public T GetObstacle<T>(ObstacleType type, Obstacle data) where T : ObstacleScript
+    public T GetObstacle<T>(Obstacle data) where T : ObstacleScript
     {
         T result = null;
 
         if (!shortObstaclePool.Peek().gameObject.activeSelf)
         {
-            result = CreateObstacle<T>(type);
+            result = CreateObstacle<T>(data.type);
         }
         else
         {
-            result = obstaclePoolDict[type].Dequeue() as T;
-            obstaclePoolDict[type].Enqueue(result);
+            result = obstaclePoolDict[data.type].Dequeue() as T;
+            obstaclePoolDict[data.type].Enqueue(result);
         }
 
         result.data = data;
 
-        switch (type)
+        switch (data.type)
         {
             case ObstacleType.SHORT:
                 break;

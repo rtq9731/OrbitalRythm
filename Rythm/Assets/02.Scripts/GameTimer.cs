@@ -32,7 +32,8 @@ public class GameTimer : MonoBehaviour
         if(isSetTimer)
         {
             _gameTime += Time.deltaTime;
-            _gameTick = (uint)Mathf.RoundToInt(_gameTime * 1000);   
+
+            if(_gameTime >= 0 ) _gameTick = (uint)Mathf.RoundToInt(_gameTime * 1000);   
         }
     }
 

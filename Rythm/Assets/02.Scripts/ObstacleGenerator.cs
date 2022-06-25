@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    public static MapDataSO curMap = null;
+    public MapDataSO curMap = null;
 
+    [SerializeField] ObstaclePoolManager pool = null;
     [SerializeField] GameTimer timer = null;
 
     int curObstacleIdx = 0;
 
     private void Update()
     {
-        if (timer.GameTick >= curMap.obstacles[curObstacleIdx].tick)
+        if(curMap.obstacles.Count <= curObstacleIdx)
         {
-            
+            enabled = false;
+            return;
+        }
+
+        if (timer.GameTick >= curMap.obstacles[curObstacleIdx].tick - 500)
+        {
+            Obstacle curObstacle = curMap.obstacles[curObstacleIdx];
+            pool.GetObstacle<ObstacleScript>(curObstacle).InitObstacle(curObstacle.tick, curObstacle.inOutType);
+            curObstacleIdx++;
         }
     }
 }

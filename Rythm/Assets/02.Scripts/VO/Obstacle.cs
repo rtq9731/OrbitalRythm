@@ -9,9 +9,32 @@ public enum ObstacleType
     HEAL
 }
 
+public enum ObstacleTypeInOutType
+{
+    Inner,
+    Outer,
+    Middle
+}
+
+
 [System.Serializable]
+public class DataObstacle
+{
+    public ObstacleTypeInOutType inOutType = ObstacleTypeInOutType.Outer;
+    public ObstacleType type;
+    public uint tick = 0;
+
+    // onlyEffect on longObstacle
+    public uint endTick;
+
+    // onlyEffect on healObstacle
+    public uint heal;
+}
+
+
 public class Obstacle
 {
+    public ObstacleTypeInOutType inOutType = ObstacleTypeInOutType.Outer;
     public ObstacleType type;
     public uint tick = 0;
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MapBaseGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject prefab;
     [SerializeField] float mapRadius = 0f;
 
     LineRenderer lineRender = null;
