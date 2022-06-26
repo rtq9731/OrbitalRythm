@@ -12,7 +12,6 @@ public class PlayerCircleMove : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(new Vector2(Mathf.Sin(360), Mathf.Cos(360)));
         transform.position = new Vector2(0, 11);
 
         timer.onTimerSet += () => gameObject.SetActive(true);
@@ -23,14 +22,32 @@ public class PlayerCircleMove : MonoBehaviour
         if (timer.GameTime <= 0)
             return;
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             isInner = !isInner;
         }
 
-        transform.position = new Vector2 (Mathf.Sin(timer.GameTime % 360f) * (10 + (isInner ? 1f : -1f)), Mathf.Cos(timer.GameTime % 360f) * (10 + (isInner ? 1f : -1f)));
+        Move();
+    }
 
-        Vector3 dir = (new Vector3(Mathf.Sin((timer.GameTime + 0.1f)% 360f) * (10 + (isInner ? 1f : -1f)), Mathf.Cos((timer.GameTime + 0.1f) % 360f) * (10 + (isInner ? 1f : -1f))) - transform.position).normalized;
+    private void Move()
+    {
+        Vector2 posVector = GetCirclePos(timer.GameTime);
+
+        transform.position = new Vector2(posVector.x, posVector.y);
+
+        Vector3 dir = (new Vector3(GetCirclePos(timer.GameTime + 0.1f).x, GetCirclePos(timer.GameTime + 0.1f).y) - transform.position).normalized;
+
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
+    }
+
+    private Vector2 GetCirclePos(float t)
+    {
+        Vector2 result = Vector2.zero;
+
+        result.x = Mathf.Sin(t) * (10 + (isInner ? 1f : -1f));
+        result.y = Mathf.Cos(t) * (10 + (isInner ? 1f : -1f));
+
+        return result;
     }
 }
