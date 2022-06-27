@@ -43,7 +43,7 @@ public class ObstaclePoolManager : MonoBehaviour
     {
         T result = null;
 
-        if (!shortObstaclePool.Peek().gameObject.activeSelf)
+        if (!obstaclePoolDict[data.type].Peek().gameObject.activeSelf)
         {
             result = CreateObstacle<T>(data.type);
         }

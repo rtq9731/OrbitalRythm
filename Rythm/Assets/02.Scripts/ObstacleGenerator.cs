@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    public MapDataSO curMap = null;
+    public MapDataSO curMap = null; // TODO : staticÀ¸·Î ¹Ù²Ü°Í.
 
     [SerializeField] ObstaclePoolManager pool = null;
     [SerializeField] GameTimer timer = null;
@@ -19,7 +19,7 @@ public class ObstacleGenerator : MonoBehaviour
             return;
         }
 
-        if (timer.GameTick >= curMap.obstacles[curObstacleIdx].tick - 500)
+        if (timer.GameTick >= curMap.obstacles[curObstacleIdx].tick - 1000)
         {
             Obstacle curObstacle = curMap.obstacles[curObstacleIdx];
             pool.GetObstacle<ObstacleScript>(curObstacle).InitObstacle(curObstacle.tick, curObstacle.inOutType);

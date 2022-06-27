@@ -34,7 +34,6 @@ public class PlayerCircleMove : MonoBehaviour
 
     private void Move(float offset)
     {
-
         Vector2 posVector = GetPlayerCirclePos(timer.GameTime, offset);
 
         transform.position = new Vector2(posVector.x, posVector.y);

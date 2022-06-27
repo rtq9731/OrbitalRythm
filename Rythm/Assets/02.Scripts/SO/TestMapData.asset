@@ -19,47 +19,53 @@ MonoBehaviour:
   songeSeconds: 0
   songTimeTick: 0
   obstacleDatas:
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 1000
     endTick: 0
     heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 1
     tick: 1500
-    endTick: 0
+    endTick: 2000
     heal: 0
-  - type: 0
-    tick: 2000
-    endTick: 0
-    heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 2500
     endTick: 0
     heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 3000
     endTick: 0
     heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 3500
     endTick: 0
     heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 4000
     endTick: 0
     heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 4500
     endTick: 0
     heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 5000
     endTick: 0
     heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 5500
     endTick: 0
     heal: 0
-  - type: 0
+  - inOutType: 1
+    type: 0
     tick: 6000
     endTick: 0
     heal: 0
