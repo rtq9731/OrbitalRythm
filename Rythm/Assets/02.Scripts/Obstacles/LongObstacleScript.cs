@@ -26,8 +26,11 @@ public class LongObstacleScript : ObstacleScript
 
         uint endTick = (data as LongObstacle).endTick;
 
-        head.position = new Vector2(Mathf.Sin(timeTick / 1000f) * (10 + inOutPlusPos), Mathf.Cos(timeTick / 1000f) * (10 + inOutPlusPos));  
+        head.position = new Vector2(Mathf.Sin(timeTick / 1000f) * (10 + inOutPlusPos), Mathf.Cos(timeTick / 1000f) * (10 + inOutPlusPos));
         tail.position = new Vector2(Mathf.Sin(endTick / 1000f) * (10 + inOutPlusPos), Mathf.Cos(endTick / 1000f) * (10 + inOutPlusPos));
+
+        head.rotation = Quaternion.Euler(new Vector3(0, 0, Vector2.Dot(Vector2.up, (head.position.x < 0 ? -head.position.normalized : head.position.normalized)) * Mathf.Rad2Deg));
+        tail.rotation = Quaternion.Euler(new Vector3(0, 0, Vector2.Dot(Vector2.up, (tail.position.x < 0 ? -tail.position.normalized : tail.position.normalized)) * Mathf.Rad2Deg));
 
         lr.positionCount = (int)GetMyLength();
         for (int i = 0; i < lr.positionCount; i++)
@@ -40,9 +43,9 @@ public class LongObstacleScript : ObstacleScript
 
     private Vector3 GetPoint(float length, int number)
     {
-        float angle = GetAngleBetweenHeadAndTail() * number / length; // number / length에 비례하는 라디안각을 구한다.
+        float angle = Vector2.Angle(Vector2.up, head.transform.position.normalized) * Mathf.Deg2Rad + GetAngleBetweenHeadAndTail() * (number / length); // number / length에 비례하는 라디안각을 구한다.
 
-        Vector3 v = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0);
+        Vector3 v = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0); 
 
         v *= 10;
 
