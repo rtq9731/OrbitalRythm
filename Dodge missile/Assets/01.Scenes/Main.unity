@@ -877,9 +877,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 9013725194262593390, guid: 3da0b7da6af63714ba05e4b6d521d011, type: 3}
-  coolBetweenAttack: 0.25
+  coolBetweenAttack: 0.15
   missileCount: 4
   missileSpeed: 2
+  attackCool: 0.15
+  missileDamage: 1
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
