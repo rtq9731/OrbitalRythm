@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7157375952883220863}
   - component: {fileID: 7157375952883220862}
+  - component: {fileID: 4013599307460932009}
   - component: {fileID: 7157375952883220860}
   - component: {fileID: 7157375952883220861}
+  - component: {fileID: 1620454598}
   m_Layer: 6
   m_Name: DodgeObstacle
   m_TagString: Untagged
@@ -27,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7157375952883220857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,6 +86,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &4013599307460932009
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7157375952883220857}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 10
+  m_LinearDrag: 1
+  m_AngularDrag: 1
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &7157375952883220860
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -113,3 +136,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 30
+  _sprites:
+  - {fileID: 21300000, guid: 64e310209c605c74ba5320a309628a53, type: 3}
+  - {fileID: 21300000, guid: f16e24562947c0448bed39ae18761dd7, type: 3}
+  - {fileID: 21300000, guid: 7f2b80530379a6141854b8252a1cf000, type: 3}
+  _velocity: {x: 0, y: 0}
+--- !u!114 &1620454598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7157375952883220857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8799a3cb144b3634daa299367f0617de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

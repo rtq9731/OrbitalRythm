@@ -27,47 +27,14 @@ public class PlayerMove : MonoBehaviour
     {
         UpdateAcceleration();
         UpdateRotation();
-        UpdateClamp();
-    }
-
-    private void UpdateClamp()
-    {
-        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-
-        if (pos.x < 0f)
-        {
-            pos.x = 0f;
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.right * 3, ForceMode2D.Impulse);
-        }
-        if (pos.x > 1f)
-        {
-            pos.x = 1f;
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.left * 3, ForceMode2D.Impulse);
-        }
-        if (pos.y < 0f)
-        {
-            pos.y = 0f;
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.up * 3, ForceMode2D.Impulse);
-        }
-        if (pos.y > 1f)
-        {
-            pos.y = 1f;
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.down * 3, ForceMode2D.Impulse);
-        }
-
-        transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 
     private void UpdateAcceleration()
     {
         velocity = rigid.velocity;
 
-        velocity += input.horizontalInput * (Vector2)transform.right * Time.deltaTime * acceleration;
-        velocity += input.verticalInput * (Vector2)transform.up * Time.deltaTime * acceleration;
+        velocity += input.horizontalInput * (Vector2)transform.right * Time.deltaTime * GameManager.Instance.timeScale * acceleration;
+        velocity += input.verticalInput * (Vector2)transform.up * Time.deltaTime * GameManager.Instance.timeScale * acceleration;
 
         velocity.x = Mathf.Clamp(velocity.x, -accelerationMax, accelerationMax);
         velocity.y = Mathf.Clamp(velocity.y, -accelerationMax, accelerationMax);

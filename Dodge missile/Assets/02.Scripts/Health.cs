@@ -15,7 +15,13 @@ public abstract class Health : MonoBehaviour, IHitable
 
     public virtual void OnHit(int damage)
     {
+        if (!gameObject.activeSelf)
+            return;
+
         _hp -= damage;
+
+        if (_hp <= 0)
+            OnDie();
     }
 
     public virtual void OnDie()

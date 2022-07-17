@@ -17,9 +17,11 @@ public static class GenericPoolManager
         return poolDict.ContainsKey(key);
     }
 
-    public static void CratePool<T>(string key, T obj, Transform parent, int count) where T : MonoBehaviour
+    public static GenericPool<T> CratePool<T>(string key, T obj, Transform parent, int count) where T : MonoBehaviour
     {
-        poolDict.Add(key, new GenericPool<T>(obj, parent, count));
+        GenericPool<T> pool = new GenericPool<T>(obj, parent, count);
+        poolDict.Add(key, pool);
+        return pool;
     }
 
     public static GenericPool<T> GetPool<T>(string key) where T : MonoBehaviour

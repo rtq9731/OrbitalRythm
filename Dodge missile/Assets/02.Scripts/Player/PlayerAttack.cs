@@ -9,8 +9,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float coolBetweenAttack = 0.3f;
     [SerializeField] float missileCount = 3;
     [SerializeField] float missileSpeed = 1;
+    [SerializeField] float attackCool = 1f;
+    [SerializeField] int missileDamage = 1;
 
     [SerializeField] LayerMask whatIsEnemy;
+
+    float attackCoolTimer = 0f;
 
     GenericPool<MissileScript> missilePool = null;
 
@@ -24,7 +28,16 @@ public class PlayerAttack : MonoBehaviour
         GenericPoolManager.CratePool<MissileScript>("Missile", missilePrefab, GameObject.Find("PoolParent").transform, 5);
         missilePool = GenericPoolManager.GetPool<MissileScript>("Missile");
 
-        input.onMouseLeftDown += Attack;
+        //input.onMouseLeftDown += Attack;
+    }
+
+    private void Update()
+    {
+        if(Input.GetMouseButton(0) && attackCoolTimer <= Time.time)
+        {
+            Attack();
+            attackCoolTimer = Time.time + attackCool;
+        }
     }
 
     public void Attack()
@@ -45,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
     {
         for (int i = 0; i < missileCount; i++)
         {
-            missilePool.GetPoolObject().InitMissile(transform.up, transform.position, target, missileSpeed);
+            missilePool.GetPoolObject().InitMissile(transform.up, transform.position, target, missileSpeed, missileDamage);
             yield return waitForSeconds;
         }
     }

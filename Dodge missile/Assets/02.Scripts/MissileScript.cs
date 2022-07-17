@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MissileScript : MonoBehaviour
 {
-    public void InitMissile(Vector2 normal, Vector3 startPos, Transform target, float timeToTarget)
+    public void InitMissile(Vector2 normal, Vector3 startPos, Transform target, float timeToTarget, int damage)
     {
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(normal.y, normal.x) * Mathf.Rad2Deg);
         transform.position = startPos;
         gameObject.SetActive(true);
-        StartCoroutine(FireToTarget(target, timeToTarget));
+        StartCoroutine(FireToTarget(target, timeToTarget, damage));
     }
 
-    IEnumerator FireToTarget(Transform target, float timeToTarget)
+    IEnumerator FireToTarget(Transform target, float timeToTarget, int damage)
     {
         Vector2 dir, targetOffset;
         Vector2[] points;
@@ -33,7 +33,7 @@ public class MissileScript : MonoBehaviour
 
         while (target.gameObject.activeSelf && Vector2.Distance(points[3], transform.position) >= 0.01f)
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * GameManager.Instance.timeScale;
 
             points[3] = (Vector2)target.position + targetOffset;
             lockOnEffect.transform.position = points[3];
@@ -50,6 +50,8 @@ public class MissileScript : MonoBehaviour
 
         explosionEffect.transform.position = transform.position;
         explosionEffect.Play();
+
+        target.GetComponent<IHitable>().OnHit(damage);
 
         transform.gameObject.SetActive(false);
     }
