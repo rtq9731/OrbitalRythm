@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b417cf165b7669489dc133a69189aef, type: 3}
+  m_Name: EffectSO
+  m_EditorClassIdentifier: 
+  effects:
+  - effectName: Missile_Explosion
+    effectScript: {fileID: 4375667466247965724, guid: c3c2a2054e85f294cad3c4a59f79a26e, type: 3}
+  - effectName: Missile_LockOn
+    effectScript: {fileID: -7460440695456890933, guid: 8610ac58a03885940adef5c55e11c734, type: 3}

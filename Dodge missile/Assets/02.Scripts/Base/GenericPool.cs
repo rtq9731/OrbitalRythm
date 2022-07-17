@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericPool<T> where T : Object
+public class GenericPool<T> where T : MonoBehaviour
 {
     private Queue<T> queue;
     private Transform parent = null;
@@ -28,7 +28,7 @@ public class GenericPool<T> where T : Object
 
         if (queue.Count > 0)
         {
-            if (!(queue.Peek() as GameObject).activeSelf)
+            if (!(queue.Peek() as MonoBehaviour).gameObject.activeSelf)
             {
                 result = queue.Dequeue();
                 queue.Enqueue(result);
@@ -50,7 +50,7 @@ public class GenericPool<T> where T : Object
         T result = MonoBehaviour.Instantiate<T>(prefab, parent);
         queue.Enqueue(result);
 
-        (result as GameObject).SetActive(false);
+        (result as MonoBehaviour).gameObject.SetActive(false);
 
         return result;
     }
