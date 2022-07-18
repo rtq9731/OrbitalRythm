@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class ResourceGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] ResourceScript resourcePrefab = null;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    GenericPool<ResourceScript> resourcePool = null;
+
+
+
 }

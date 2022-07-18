@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLoot : MonoBehaviour
+public abstract class LootObj : MonoBehaviour
 {
-    [SerializeField] int cost = 5;
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Resource"))
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            OnEat();
             gameObject.SetActive(false);
+        }
     }
+
+    protected abstract void OnEat();
 }
