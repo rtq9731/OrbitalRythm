@@ -19,25 +19,25 @@ public class HPBarScript : MonoBehaviour
     {
         RefreshColor();
 
+        Invoke("Test", 1f);
+        Invoke("Test", 2f);
         Invoke("Test", 3f);
-        Invoke("TestTwo", 9f);
+        Invoke("Test", 4f);
     }
 
     private void Test()
     {
-        SetUpdateHp(70);
+        SetUpdateHp(_targetHp - 10);
     }
 
-    private void TestTwo()
+    public void SetUpdateHp(float damage)
     {
-        SetUpdateHp(40);
-    }
+        _targetHp = damage;
 
-    public void SetUpdateHp(int targetHP)
-    {
-        _targetHp = targetHP;
+        if (cor != null)
+            StopCoroutine(cor);
 
-        StartCoroutine(UpdateImage());
+        cor = StartCoroutine(UpdateImage());
     }
 
     private void Update()
@@ -47,7 +47,6 @@ public class HPBarScript : MonoBehaviour
 
     private IEnumerator UpdateImage()
     {
-        Debug.Log("ぞしぞし");
         float timer = 0f;
 
         while (lerpTime >= timer)
