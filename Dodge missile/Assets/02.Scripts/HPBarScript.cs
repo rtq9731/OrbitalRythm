@@ -19,16 +19,25 @@ public class HPBarScript : MonoBehaviour
     {
         RefreshColor();
 
-        SetUpdateHp(70);
+        Invoke("Test", 3f);
+        Invoke("TestTwo", 9f);
+    }
 
+    private void Test()
+    {
+        SetUpdateHp(70);
+    }
+
+    private void TestTwo()
+    {
+        SetUpdateHp(40);
     }
 
     public void SetUpdateHp(int targetHP)
     {
         _targetHp = targetHP;
 
-        if(cor == null)
-        cor = StartCoroutine(UpdateImage());
+        StartCoroutine(UpdateImage());
     }
 
     private void Update()
@@ -38,29 +47,35 @@ public class HPBarScript : MonoBehaviour
 
     private IEnumerator UpdateImage()
     {
+        Debug.Log("ぞしぞし");
         float timer = 0f;
-        while (timer <= lerpTime)
+
+        while (_fillImage.fillAmount >= _targetHp / 100)
         {
-            _fillImage.fillAmount = Mathf.Lerp(_fillImage.fillAmount, _targetHp / 100, timer / lerpTime);
+            _fillImage.fillAmount = Mathf.Lerp(_fillImage.fillAmount, _targetHp / 100, timer);
             timer += Time.deltaTime;
             yield return null;
         }
+
         timer = 0f;
 
         yield return new WaitForSeconds(1f);
 
-        while (timer <= lerpTime)
+        Debug.Log(_fillLookImage.fillAmount);
+        while (_fillLookImage.fillAmount >= _targetHp / 100)
         {
-            _fillLookImage.fillAmount = Mathf.Lerp(_fillLookImage.fillAmount, _targetHp / 100, timer / lerpTime);
+            _fillLookImage.fillAmount = Mathf.Lerp(_fillLookImage.fillAmount, _targetHp / 100, timer);
             timer += Time.deltaTime;
             yield return null;
         }
+
+        yield return null;
     }
 
     private void RefreshColor()
     {
-        _fillImage.color = new Color(_fillImage.fillAmount != 0 ? 1f / _fillImage.fillAmount : 0f, _fillImage.fillAmount, 0);
-        _fillLookImage.color = new Color(_fillLookImage.fillAmount != 0 ? 1f / _fillLookImage.fillAmount : 0f, _fillLookImage.fillAmount, 0, 0.2f);
+        _fillImage.color = new Color(_fillImage.fillAmount != 0 ? 1f - _fillImage.fillAmount : 0f, _fillImage.fillAmount, 0);
+        _fillLookImage.color = new Color(_fillLookImage.fillAmount != 0 ? 1f - _fillLookImage.fillAmount : 0f, _fillLookImage.fillAmount, 0, 0.2f);
     }
 
 }

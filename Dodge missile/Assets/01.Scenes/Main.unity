@@ -840,7 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fillImage: {fileID: 228977559}
   _fillLookImage: {fileID: 946648853}
-  lerpTime: 10
+  lerpTime: 1
 --- !u!1 &928313408
 GameObject:
   m_ObjectHideFlags: 0
