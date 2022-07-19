@@ -50,21 +50,20 @@ public class HPBarScript : MonoBehaviour
         Debug.Log("ぞしぞし");
         float timer = 0f;
 
-        while (_fillImage.fillAmount >= _targetHp / 100)
+        while (lerpTime >= timer)
         {
-            _fillImage.fillAmount = Mathf.Lerp(_fillImage.fillAmount, _targetHp / 100, timer);
+            _fillImage.fillAmount = Mathf.Lerp(_fillImage.fillAmount, _targetHp / 100, timer / lerpTime);
             timer += Time.deltaTime;
             yield return null;
         }
 
         timer = 0f;
 
-        yield return new WaitForSeconds(1f);
-
         Debug.Log(_fillLookImage.fillAmount);
-        while (_fillLookImage.fillAmount >= _targetHp / 100)
+        while (lerpTime >= timer)
         {
-            _fillLookImage.fillAmount = Mathf.Lerp(_fillLookImage.fillAmount, _targetHp / 100, timer);
+            Debug.Log(timer / lerpTime);
+            _fillLookImage.fillAmount = Mathf.Lerp(_fillLookImage.fillAmount, _targetHp / 100, timer / lerpTime);
             timer += Time.deltaTime;
             yield return null;
         }
