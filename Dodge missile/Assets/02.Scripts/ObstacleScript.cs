@@ -7,13 +7,13 @@ public class ObstacleScript : Health
     [SerializeField] Sprite[] _sprites = null;
 
     SpriteRenderer _sr = null;
+    Rigidbody2D rigid = null;
 
-    int _tier = 1;
-
-    public Vector2 _velocity = Vector2.zero;
+    public int _tier = 1;
 
     protected override void Awake()
     {
+        rigid = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
     }
 
