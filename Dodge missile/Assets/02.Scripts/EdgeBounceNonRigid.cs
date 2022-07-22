@@ -18,22 +18,22 @@ public class EdgeBounceNonRigid : MonoBehaviour
         if (pos.x < -0.1f)
         {
             pos.x = -0.1f;
-            obstacle._velocity = new Vector2(Mathf.Abs(obstacle._velocity.x), obstacle._velocity.y);
+            obstacle.rigid.velocity = new Vector2(Mathf.Abs(obstacle.rigid.velocity.x), obstacle.rigid.velocity.y);
         }
         if (pos.x > 1.1f)
         {
             pos.x = 1.1f;
-            obstacle._velocity = new Vector2(-Mathf.Abs(obstacle._velocity.x), obstacle._velocity.y);
+            obstacle.rigid.velocity  = new Vector2(-Mathf.Abs(obstacle.rigid.velocity .x), obstacle.rigid.velocity.y);
         }
         if (pos.y < -0.1f)
         {
             pos.y = -0.1f;
-            obstacle._velocity = new Vector2(obstacle._velocity.x, Mathf.Abs(obstacle._velocity.x));
+            obstacle.rigid.velocity  = new Vector2(obstacle.rigid.velocity.x, Mathf.Abs(obstacle.rigid.velocity.y));
         }
         if (pos.y > 1.1f)
         {
             pos.y = 1.1f;
-            obstacle._velocity = new Vector2(obstacle._velocity.x, -Mathf.Abs(obstacle._velocity.x));
+            obstacle.rigid.velocity  = new Vector2(obstacle.rigid.velocity.x, -Mathf.Abs(obstacle.rigid.velocity.y));
         }
 
         transform.position = Camera.main.ViewportToWorldPoint(pos);

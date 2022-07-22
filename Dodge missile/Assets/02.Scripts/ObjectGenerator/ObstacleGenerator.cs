@@ -11,6 +11,7 @@ public class ObstacleGenerator : MonoBehaviour
 
     [SerializeField] float upgradeTime = 40f;
     [SerializeField] float spawnTime = 10f;
+    [SerializeField] float obstacleInitVelo = 7.5f;
 
     float upgradeTimer = 0f;
     float spawnTimer = 0f;

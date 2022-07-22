@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7157375952883220862}
   - component: {fileID: 7157375952883220860}
   - component: {fileID: 7157375952883220861}
-  - component: {fileID: 1620454598}
+  - component: {fileID: 7022555522053537085}
   - component: {fileID: 5161172623312980926}
   m_Layer: 6
   m_Name: DodgeObstacle
@@ -119,9 +119,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 64e310209c605c74ba5320a309628a53, type: 3}
   - {fileID: 21300000, guid: f16e24562947c0448bed39ae18761dd7, type: 3}
   - {fileID: 21300000, guid: 7f2b80530379a6141854b8252a1cf000, type: 3}
+  rigid: {fileID: 0}
   _tier: 1
-  _velocity: {x: 0, y: 0}
---- !u!114 &1620454598
+--- !u!114 &7022555522053537085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7157375952883220857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8799a3cb144b3634daa299367f0617de, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fcc0bd20982e0f4eb9589a28b3cfa3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &5161172623312980926

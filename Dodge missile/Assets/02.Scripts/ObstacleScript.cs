@@ -7,7 +7,7 @@ public class ObstacleScript : Health
     [SerializeField] Sprite[] _sprites = null;
 
     SpriteRenderer _sr = null;
-    Rigidbody2D rigid = null;
+    public Rigidbody2D rigid = null;
 
     public int _tier = 1;
 
@@ -32,18 +32,8 @@ public class ObstacleScript : Health
 
         _sr.sprite = _sprites[Random.Range(0, _sprites.Length)];
 
-        _velocity = dir * speed;
+        rigid.velocity = dir * speed;
         transform.localScale = new Vector3(tier, tier, tier);
-    }
-
-    private void Update()
-    {
-        CalcMoving();
-    }
-
-    private void CalcMoving()
-    {
-        transform.Translate(_velocity * Time.deltaTime * GameManager.Instance.timeScale);
     }
 
     public override void OnDie()
