@@ -50,6 +50,8 @@ public class ObstacleScript : Health
     {
         gameObject.SetActive(false);
 
+        FindObjectOfType<ResourceGenerator>().GenerateResource(transform.position, _tier);
+
         if(_tier > 1)
         {
             FindObjectOfType<ObstacleGenerator>().SpawnObstacle(_tier - 1, transform.position);

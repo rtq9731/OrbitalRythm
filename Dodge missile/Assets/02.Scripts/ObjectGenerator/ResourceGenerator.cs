@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceGenerator : MonoBehaviour
+public class ResourceGenerator : ObjectGenerator<ResourceScript>
 {
-    [SerializeField] ResourceScript resourcePrefab = null;
+    public void GenerateResource(Vector2 pos, int tier)
+    {
+        for (int i = 0; i < tier; i++)
+        {
+            ResourceScript obj = objectPool.GetPoolObject();
 
-    GenericPool<ResourceScript> resourcePool = null;
-
-
-
+            obj.transform.position = pos + Utill.GetRandomDir();
+            obj.gameObject.SetActive(true);
+        }
+    }
 }

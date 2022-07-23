@@ -46,4 +46,22 @@ public static class Utill
 
         return points;
     }
+
+
+    /// <summary>
+    /// 랜덤한 방향을 반환합니다.
+    /// </summary>
+    /// <returns></returns>
+    public static Vector2 GetRandomDir()
+    {
+        Vector2 result = Vector2.zero;
+
+        do
+        {
+            result = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        }
+        while (result == Vector2.zero);
+
+        return result;
+    }
 }

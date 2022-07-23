@@ -4,14 +4,15 @@ using UnityEngine;
 
 public abstract class LootObj : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            OnEat();
+            OnEat(collision.transform);
             gameObject.SetActive(false);
         }
     }
 
-    protected abstract void OnEat();
+    protected abstract void OnEat(Transform target);
 }
