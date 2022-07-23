@@ -1,10 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EdgeBounce : MonoBehaviour
 {
-    Rigidbody2D rigid;
+    protected Rigidbody2D rigid;
+
+    [SerializeField] Edge edgeViewportPoint;
+
+    /// <summary>
+    /// 오브젝트가 지정된 위치 끝부분에 부딫혔을 때, 반대방향의 벡터를 내보냅니다.
+    /// </summary>
+    protected Action<Vector2> onEdgeCollide = (dir) => { };
 
     private void Awake()
     {
@@ -15,31 +23,37 @@ public class EdgeBounce : MonoBehaviour
     {
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 
-        if (pos.x < 0f)
+        if (pos.x < edgeViewportPoint.minX)
         {
-            pos.x = 0f;
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.right * 3, ForceMode2D.Impulse);
+            pos.x = edgeViewportPoint.minX;
+            onEdgeCollide?.Invoke(Vector2.right);
         }
-        if (pos.x > 1f)
+        if (pos.x > edgeViewportPoint.maxX)
         {
-            pos.x = 1f;
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.left * 3, ForceMode2D.Impulse);
+            pos.x = edgeViewportPoint.maxX;
+            onEdgeCollide?.Invoke(Vector2.left);
         }
-        if (pos.y < 0f)
+        if (pos.y < edgeViewportPoint.minY)
         {
-            pos.y = 0f;
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.up * 3, ForceMode2D.Impulse);
+            pos.y = edgeViewportPoint.minY;
+            onEdgeCollide?.Invoke(Vector2.up);
         }
-        if (pos.y > 1f)
+        if (pos.y > edgeViewportPoint.maxY)
         {
-            pos.y = 1f;
-            rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.down * 3, ForceMode2D.Impulse);
+            pos.y = edgeViewportPoint.maxY;
+            onEdgeCollide?.Invoke(Vector2.down);
         }
 
         transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 }
+
+[System.Serializable]
+public struct Edge
+{
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
+}
+

@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float acceleration = 1f;
     [SerializeField] float angleOffset = 45f;
 
+    [SerializeField] ParticleSystem afterBurner = null; 
+
     Rigidbody2D rigid = null;
     Vector2 velocity = Vector2.zero;
     PlayerInput input = null;
@@ -35,6 +37,8 @@ public class PlayerMove : MonoBehaviour
 
         velocity += input.horizontalInput * (Vector2)transform.right * Time.deltaTime * GameManager.Instance.timeScale * acceleration;
         velocity += input.verticalInput * (Vector2)transform.up * Time.deltaTime * GameManager.Instance.timeScale * acceleration;
+
+        afterBurner.transform.localScale = new Vector3(input.verticalInput, input.verticalInput, 0);
 
         velocity.x = Mathf.Clamp(velocity.x, -accelerationMax, accelerationMax);
         velocity.y = Mathf.Clamp(velocity.y, -accelerationMax, accelerationMax);

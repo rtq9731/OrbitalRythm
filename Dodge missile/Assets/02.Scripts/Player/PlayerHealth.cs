@@ -37,7 +37,7 @@ public class PlayerHealth : Health
     public void OnHit(int damage, Transform obstacle)
     {
 
-        hpBar.SetUpdateValue(damage);
+        hpBar.SetUpdateValue(-damage);
 
         StartCoroutine(hitEffect());
 

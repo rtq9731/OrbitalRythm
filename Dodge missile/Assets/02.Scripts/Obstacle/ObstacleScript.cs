@@ -17,6 +17,16 @@ public class ObstacleScript : Health
         _sr = GetComponent<SpriteRenderer>();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            float speed = rigid.velocity.magnitude;
+
+            rigid.velocity = Vector2.Reflect(rigid.velocity.normalized, collision.contacts[0].normal) * speed;
+        }
+    }
+
     public void InitObstacle(int tier, int hp, float speed, Vector2 dir, Vector2 point)
     {
         _hp = hp;
@@ -32,8 +42,8 @@ public class ObstacleScript : Health
 
         _sr.sprite = _sprites[Random.Range(0, _sprites.Length)];
 
-        rigid.velocity = dir * speed;
         transform.localScale = new Vector3(tier, tier, tier);
+        rigid.velocity = dir * speed;
     }
 
     public override void OnDie()

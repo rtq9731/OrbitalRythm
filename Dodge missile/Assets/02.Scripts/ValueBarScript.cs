@@ -31,9 +31,9 @@ public class ValueBarScript : MonoBehaviour
         RefreshColor();
     }
 
-    public void SetUpdateValue(float minus)
+    public void SetUpdateValue(float value)
     {
-        _targetValue -= minus;
+        _targetValue += value;
         _targetValue = Mathf.Clamp(_targetValue, minValue, maxValue);
 
         if (cor != null)

@@ -21,7 +21,7 @@ public class MissileScript : MonoBehaviour
 
         float timer = 0f;
 
-        points = GetNearPointsToTarget(target);
+        points = Utill.GetNearPointsToTarget(transform.position, target);
         points[0] = transform.position;
 
         targetOffset = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
@@ -38,9 +38,9 @@ public class MissileScript : MonoBehaviour
             points[3] = (Vector2)target.position + targetOffset;
             lockOnEffect.transform.position = points[3];
 
-            transform.position = GetBezierPoint(timer / timeToTarget, points);
+            transform.position = Utill.GetBezierPoint(timer / timeToTarget, points);
 
-            dir = (GetBezierPoint(timer + 0.01f / timeToTarget, points) - (Vector2)transform.position).normalized;
+            dir = (Utill.GetBezierPoint(timer + 0.01f / timeToTarget, points) - (Vector2)transform.position).normalized;
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
 
             yield return null;
@@ -56,33 +56,4 @@ public class MissileScript : MonoBehaviour
         transform.gameObject.SetActive(false);
     }
 
-    private Vector2 GetBezierPoint(float timing, Vector2[] points)
-    {
-        return Vector2.Lerp(Vector2.Lerp(Vector2.Lerp(points[0], points[1], timing), Vector2.Lerp(points[1], points[2], timing), timing), Vector2.Lerp(Vector2.Lerp(points[1], points[2], timing), Vector2.Lerp(points[2], points[3], timing), timing), timing);
-    }
-
-    private Vector2[] GetNearPointsToTarget(Transform target)
-    {
-        Vector2[] points = new Vector2[4]; 
-        float[] timings = new float[4]{ 0, 0, 0, 1 }; // 근처 점을 뽑아올 직선 상의 위치비 ( ex 0.5 -> 중간점 )
-
-        for (int i = 1; i < 3; i++)
-        {
-            timings[i] = Random.Range(0, 1);
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            Vector2 point = Vector2.Lerp(transform.position, target.position, timings[i]);
-            points[i] = point;
-        }
-
-        for (int i = 1; i < 3; i++)
-        {
-            points[i].x += Random.Range(-5, 5);
-            points[i].y += Random.Range(-5, 5);
-        }
-
-        return points;
-    }
 }
