@@ -18,6 +18,8 @@ public class PlayerInven : MonoBehaviour
         if(nextLevelResource <= _curResource)
         {
             nextLevelResource += (int)(nextLevelResource * 1.2f);
+            resourceBar.RefreshMaxValue(nextLevelResource);
+            resourceBar.ResetValue();
         }
     }
 

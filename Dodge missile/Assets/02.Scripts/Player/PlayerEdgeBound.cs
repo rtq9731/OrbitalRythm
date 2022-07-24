@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerEdgeBound : EdgeBounce
 {
-    private void Awake()
+    private void Start()
     {
         onEdgeCollide += (dir) =>
         {
             rigid.velocity = Vector2.zero;
-            rigid.AddForce(dir * 3, ForceMode2D.Impulse);
+            rigid.AddForce(dir * 4, ForceMode2D.Impulse);
         };
     }
 }

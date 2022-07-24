@@ -22,7 +22,7 @@ public class PlayerHealth : Health
     {
         if(collision.gameObject.CompareTag("Enemy") && canHit)
         {
-            OnHit(collision.gameObject.GetComponent<ObstacleScript>()._tier * 5, collision.transform);
+            OnHit(collision.gameObject.GetComponent<ObstacleScript>()._tier * 5);
         }
     }
 
@@ -30,13 +30,12 @@ public class PlayerHealth : Health
     {
         if (collision.gameObject.CompareTag("Enemy") && canHit)
         {
-            OnHit(collision.gameObject.GetComponent<ObstacleScript>()._tier * 5, collision.transform);
+            OnHit(collision.gameObject.GetComponent<ObstacleScript>()._tier * 5);
         }
     }
 
-    public void OnHit(int damage, Transform obstacle)
+    public override void OnHit(int damage)
     {
-
         hpBar.SetUpdateValue(-damage);
 
         StartCoroutine(hitEffect());

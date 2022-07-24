@@ -10,7 +10,6 @@ public abstract class LootObj : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             OnEat(collision.transform);
-            gameObject.SetActive(false);
         }
     }
 

@@ -31,6 +31,19 @@ public class ValueBarScript : MonoBehaviour
         RefreshColor();
     }
 
+    public void ResetValue()
+    {
+        _targetValue = initValue;
+        _fillImage.fillAmount = 0;
+        _fillLookImage.fillAmount = 0;
+        RefreshColor();
+    }
+
+    public void RefreshMaxValue(float value)
+    {
+        maxValue = value;
+    }
+
     public void SetUpdateValue(float value)
     {
         _targetValue += value;
