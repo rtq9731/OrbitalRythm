@@ -10,6 +10,11 @@ public class PlayerInven : MonoBehaviour
 
     int nextLevelResource = 3;
 
+    private void Start()
+    {
+        resourceBar.RefreshMaxValue(nextLevelResource);
+    }
+
     public void GetItem(int cost)
     {
         resourceBar.SetUpdateValue(cost);

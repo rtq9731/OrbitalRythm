@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float coolBetweenAttack = 0.3f;
     [SerializeField] float missileCount = 3;
     [SerializeField] float missileSpeed = 1;
-    [SerializeField] float attackCool = 1f;
+    [SerializeField] float attackCool = 2;
     [SerializeField] int missileDamage = 1;
 
     [SerializeField] LayerMask whatIsEnemy;

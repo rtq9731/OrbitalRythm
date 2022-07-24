@@ -13,7 +13,7 @@ public class ObstacleGenerator : ObjectGenerator<ObstacleScript>
     float upgradeTimer = 0f;
     float spawnTimer = 0f;
 
-    int curObstacleTier = 1;
+    int maxObstacleTier = 1;
 
     private void Update()
     {
@@ -28,14 +28,16 @@ public class ObstacleGenerator : ObjectGenerator<ObstacleScript>
 
         if(spawnTimer >= spawnTime)
         {
-            SpawnObstacle(curObstacleTier);
+            SpawnObstacle(Random.Range(1, maxObstacleTier));
+            SpawnObstacle(Random.Range(1, maxObstacleTier));
+            SpawnObstacle(Random.Range(1, maxObstacleTier));
             spawnTimer = 0f;
         }
     }
 
     public void UpgradeObstacle()
     {
-        curObstacleTier++;
+        maxObstacleTier++;
     }
 
     public void SpawnObstacle(int tier)
