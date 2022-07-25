@@ -34,7 +34,7 @@ public class PlayerHealth : Health
         }
     }
 
-    public override void OnHit(int damage)
+    public override void OnHit(float damage)
     {
         hpBar.SetUpdateValue(-damage);
 

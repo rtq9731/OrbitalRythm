@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    UpgradeInfo _upgradeData = new UpgradeInfo();
+    PlayerInfo _upgradeData = new PlayerInfo();
 
     private static UpgradeManager _instance = null;
 
@@ -50,86 +51,126 @@ public class UpgradeManager : MonoBehaviour
         _instance = this;
     }
 
-    public void Upgrade(UpgradeCode upgradeCode)
+    public void Upgrade(UpgradeCode upgradeCode, Action callBack = null)
     {
-        _upgradeData.Upgrade(upgradeCode);
+        _upgradeData.Upgrade(upgradeCode, callBack = null);
     }
 }
 
 [System.Serializable]
-public class UpgradeInfo
+public class PlayerInfo
 {
-    private bool canShootActiveMissile = false;
-    private bool canSlowMotion = false;
-    private bool canShield = false;
-    private bool canShockWave = false;
+    public event Action<UpgradeCode> onFirstUpgrade = (x) => {};
 
-    private int initMissileCount = 3;
+    [SerializeField] private bool canShootActiveMissile = false;
+    [SerializeField] private bool canSlowMotion = false;
+    [SerializeField] private bool canShield = false;
+    [SerializeField] private bool canShockWave = false;
+    [SerializeField] private bool canWarp = false;
 
-    private float initMissileTime = 2f;
-    private float initAccleration = 3f;
+    [SerializeField] private int initMissileCount = 3;
+    
+    [SerializeField] private float initMissileTime = 2f;
+    [SerializeField] private float initAccleration = 3f;
+    
+    [SerializeField] private int moreMissileUpgradeCount = 0;
+    [SerializeField] private int fastMissileUpgradeCount = 0;
+    [SerializeField] private int moreAcclerationUpgradeCount = 0;
+    [SerializeField] private int forceFieldUpgradeCount = 0;
 
-    private int moreMissileUpgradeCount = 0;
-    private int fastMissileUpgradeCount = 0;
-    private int slowMotionUpgradeCount = 0;
-    private int moreAcclerationUpgradeCount = 0;
-    private int shockWaveUpgradeCount = 0;
-    private int forceFieldUpgradeCount = 0;
+    [SerializeField] private float curMissileTime = 0f;
+    [SerializeField] private float curAccleration = 0f;
+   
+    [SerializeField] private int curMissileCount = 0;
+    [SerializeField] private float fieldRecoverPerSec = 0f;
+    [SerializeField] private float curHPMax = 0f;
 
-    private float curMissileTime = 0f;
-    private float curAccleration = 0f;
-
-    private int curMissileCount = 0;
-
-    private float fieldRecoverPerSec = 0f;
-    private float curHPMax = 0f;
-
-    public void Upgrade(UpgradeCode upgradeCode)
+    public void Upgrade(UpgradeCode upgradeCode, Action callBack = null)
     {
+        bool finishUpgrade = false;
+
         switch (upgradeCode)
         {
             case UpgradeCode.Attack_MoreMissile:
-                moreMissileUpgradeCount++;
-                
-                break;
+                {
+                    moreMissileUpgradeCount++;
+                    finishUpgrade = true;
+                    break;
+                }
             case UpgradeCode.Attack_ActiveMissile:
-                
-                
+                {
+                    if(!canShootActiveMissile)
+                    {
+                        onFirstUpgrade?.Invoke(UpgradeCode.Attack_ActiveMissile);
+                        canShootActiveMissile = true;
+                        finishUpgrade = true;
+                    }
+                }
                 break;
             case UpgradeCode.Attack_FastMissile:
-                
-                
+                {
+                    fastMissileUpgradeCount++;
+                    finishUpgrade = true;
+                }
                 break;
             case UpgradeCode.Attack_SlowMotion:
-                
-                
+                {
+                    if(!canSlowMotion)
+                    {
+                        onFirstUpgrade?.Invoke(UpgradeCode.Attack_SlowMotion);
+                        canSlowMotion = true;
+                        finishUpgrade = true;
+                    }
+                }
                 break;
             case UpgradeCode.Move_MoreAcceleration:
-                
-                
+                {
+                    moreAcclerationUpgradeCount++;
+                    finishUpgrade = true;
+                }
                 break;
             case UpgradeCode.Move_Warp:
-                
-                
+                {
+                    if (!canWarp)
+                    {
+                        onFirstUpgrade?.Invoke(UpgradeCode.Move_Warp);
+                        canWarp = true;
+                        finishUpgrade = true;
+                    }
+                }
                 break;
             case UpgradeCode.Defense_ShockWave:
-                
-                
+                {
+                    canShockWave = true;
+                    finishUpgrade = true;
+                }
                 break;
             case UpgradeCode.Defense_MoreHP:
-
-
+                {
+                    finishUpgrade = true;
+                }
                 break;
             case UpgradeCode.Defense_RecoverHP:
-
-
+                {
+                    finishUpgrade = true;
+                }
                 break;
             case UpgradeCode.Defense_ForceField:
-                canShield = true;
-
+                {
+                    if (!canShield && forceFieldUpgradeCount <= 0)
+                    {
+                        onFirstUpgrade(UpgradeCode.Defense_ForceField);
+                        canShield = true;
+                    }
+                    forceFieldUpgradeCount++;
+                    finishUpgrade = true;
+                }
                 break;
             default:
                 break;
         }
+
+        if (finishUpgrade)
+            callBack?.Invoke();
     }
 }
