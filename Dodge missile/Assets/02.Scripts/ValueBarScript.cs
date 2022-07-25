@@ -73,7 +73,6 @@ public class ValueBarScript : MonoBehaviour
 
         timer = 0f;
 
-        Debug.Log(_fillLookImage.fillAmount);
         while (lerpTime >= timer)
         {
             _fillLookImage.fillAmount = Mathf.Lerp(_fillLookImage.fillAmount, _targetValue / maxValue, timer / lerpTime);
