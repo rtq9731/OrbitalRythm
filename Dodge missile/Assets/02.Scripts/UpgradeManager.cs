@@ -36,7 +36,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    PlayerInfo _upgradeData = new PlayerInfo();
+    UpgradeInfo _upgradeData = new UpgradeInfo();
 
     private static UpgradeManager _instance = null;
 
@@ -58,7 +58,7 @@ public class UpgradeManager : MonoBehaviour
 }
 
 [System.Serializable]
-public class PlayerInfo
+public class UpgradeInfo
 {
     public event Action<UpgradeCode> onFirstUpgrade = (x) => {};
 
